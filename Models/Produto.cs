@@ -15,6 +15,9 @@ namespace Unifaat.ProjetoTeste.Models
         [Display(Name = "Preço")]
         public decimal Preco { get; set; }
 
+        public DateTime? DataCadastro { get; set; }
+
+
         [Required]
         [MaxLength(100)]    //Truncamento
        // [StringLength(100)]  //Exception
