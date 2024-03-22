@@ -26,6 +26,22 @@ namespace Unifaat.ProjetoTeste.Controllers
             var applicationDbContext = _context.Produtos.Include(p => p.Categoria);
             return View(await applicationDbContext.ToListAsync());
         }
+        public async Task<IActionResult> CreateProductByGet(string Nome, int CategoriaId, decimal preco)
+        {
+
+            var newProduct = new Produto();
+            newProduct.Nome = Nome;
+            newProduct.Preco = preco;
+            newProduct.CategoriaId = CategoriaId;
+
+
+            newProduct.DataCadastro = DateTime.Now;
+
+            _context.Produtos.Add(newProduct);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
 
         // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -88,11 +104,7 @@ namespace Unifaat.ProjetoTeste.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Produto produto)
         {
             if (id != produto.ProdutoId)

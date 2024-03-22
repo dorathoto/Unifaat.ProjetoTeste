@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Unifaat.ProjetoTeste.Data;
@@ -7,6 +8,7 @@ using Unifaat.ProjetoTeste.Models;
 namespace Unifaat.ProjetoTeste.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class AccountController : Controller
     {
         public readonly UserManager<Usuario> _userManager;
@@ -28,6 +30,7 @@ namespace Unifaat.ProjetoTeste.Areas.Admin.Controllers
 
         //HTTPGET fazer o login do usuário 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
             //logout
@@ -36,6 +39,8 @@ namespace Unifaat.ProjetoTeste.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string email, string senha)
         {
             var user = await _userManager.FindByEmailAsync(email);

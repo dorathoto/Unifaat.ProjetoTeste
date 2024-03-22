@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Unifaat.ProjetoTeste.Models
 {
@@ -23,6 +24,7 @@ namespace Unifaat.ProjetoTeste.Models
        // [StringLength(100)]  //Exception
         public string Nome { get; set; } //varchar(max)
 
+        [JsonIgnore]
         public virtual Categoria? Categoria { get; set; }
     }
 }
