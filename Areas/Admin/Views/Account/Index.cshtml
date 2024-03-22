@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Unifaat.ProjetoTeste.Models.Usuario>
+@{
+    var t = Model.FirstOrDefault();
+
+}
+
+<table >
+    <thead>
+    <tr>
+        <th>Nome Completo</th>
+        <th>RA</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.NomeCompleto</td>
+            <td>@item.RA</td>
+        </tr>
+    }
+    </tbody>
+</table>

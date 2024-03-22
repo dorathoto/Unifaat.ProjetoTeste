@@ -1,0 +1,13 @@
+﻿
+<form asp-action="Login" asp-controller="Account" method="post">
+    <div class="mb-3">
+        <input name="email" class="form-control" placeholder="Nome de Usuário" required>
+    </div>
+    <div class="mb-3">
+        <input name="senha" class="form-control" placeholder="Senha" required>
+    </div>
+    <button type="submit" class="btn btn-green w-100">Entrar</button>
+
+    <!-- Novo botão para redirecionar à tela de cadastro -->
+    <a asp-action="Register" asp-controller="Account" class="btn btn-link text-muted mt-3">Cadastre-se</a>
+</form>
