@@ -175,6 +175,13 @@ namespace Unifaat.ProjetoTeste.Migrations
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Categorias");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoriaId = 1,
+                            Nome = "Categoria 2"
+                        });
                 });
 
             modelBuilder.Entity("Unifaat.ProjetoTeste.Models.Produto", b =>
@@ -204,6 +211,15 @@ namespace Unifaat.ProjetoTeste.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Produtos");
+
+                    b.HasData(
+                        new
+                        {
+                            ProdutoId = 1,
+                            CategoriaId = 1,
+                            Nome = "Produto 12",
+                            Preco = 10m
+                        });
                 });
 
             modelBuilder.Entity("Unifaat.ProjetoTeste.Models.Usuario", b =>

@@ -13,5 +13,13 @@ namespace Unifaat.ProjetoTeste.Data
 
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+     //       new DbInitializerSeed(modelBuilder).Seed();
+
+
+        }
     }
 }

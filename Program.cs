@@ -12,12 +12,16 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddTransient<DataSeeder>();
+//Add Repository Pattern
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+
+//Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 //builder.Services.AddSingleton<IEmailSender, EmailSender>();
 //builder.Services.AddScoped<IUserStore<Usuario>, UserStore<Usuario, IdentityRole, ApplicationDbContext, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityUserToken<string>, IdentityRoleClaim<string>>>();
@@ -25,6 +29,17 @@ builder.Services.AddControllersWithViews();
 
 
 var app = builder.Build();
+
+//Seed Data
+
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<DataSeeder>();
+        service.Seed();
+    }
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
